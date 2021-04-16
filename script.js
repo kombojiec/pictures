@@ -931,11 +931,15 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   Object(_modules_modal__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.feedback-slider-item', '', '.main-prev-btn', '.main-next-btn');
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-slider-item', 'vertical');
 });
 
 /***/ }),
@@ -1026,7 +1030,6 @@ var modal = function modal() {
   function openModalByScroll() {
     window.addEventListener('scroll', function () {
       if (!pressedButton && window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-        console.log('bottom');
         document.querySelector('.fixed-gift').click();
         pressedButton = true;
       }
@@ -1054,6 +1057,91 @@ var modal = function modal() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modal);
+
+/***/ }),
+
+/***/ "./src/js/modules/slider.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/slider.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var slider = function slider(slideSelector, direct, prevButtonSelector, nextButtonSelector) {
+  var moveStep = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
+  var slides = document.querySelectorAll(slideSelector);
+  var direction = direct;
+  var paused = false;
+  var currentSlide = 0;
+
+  function showSlide(value) {
+    if (value >= slides.length) {
+      currentSlide = 0;
+    } else if (value < 0) {
+      currentSlide = slides.length - 1;
+    } else {
+      currentSlide = value;
+    }
+
+    slides.forEach(function (slide) {
+      slide.classList.add('animated');
+      slide.style.display = 'none';
+    });
+    slides[currentSlide].style.display = 'block';
+  }
+
+  showSlide(currentSlide);
+
+  function setSlide(moveStep) {
+    showSlide(currentSlide + moveStep);
+  }
+
+  try {
+    var prevButton = document.querySelector(prevButtonSelector);
+    var nextButton = document.querySelector(nextButtonSelector);
+    prevButton.addEventListener('click', function () {
+      setSlide(-moveStep);
+      slides[currentSlide].classList.remove('slideInLeft');
+      slides[currentSlide].classList.add('slideInRight');
+    });
+    nextButton.addEventListener('click', function () {
+      setSlide(moveStep);
+      slides[currentSlide].classList.remove('slideInRight');
+      slides[currentSlide].classList.add('slideInLeft');
+    });
+  } catch (error) {}
+
+  function activateSlider() {
+    if (direction == 'vertical') {
+      paused = setInterval(function () {
+        setSlide(moveStep);
+        slides[currentSlide].classList.add('slideInDown');
+      }, 3000);
+    } else {
+      paused = setInterval(function () {
+        setSlide(-moveStep);
+        slides[currentSlide].classList.remove('slideInLeft');
+        slides[currentSlide].classList.add('slideInRight');
+      }, 3000);
+    }
+  }
+
+  activateSlider();
+  slides[0].parentNode.addEventListener('mouseenter', function () {
+    clearInterval(paused);
+  });
+  slides[0].parentNode.addEventListener('mouseleave', function () {
+    activateSlider();
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (slider);
 
 /***/ })
 
