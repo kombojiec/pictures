@@ -70,7 +70,6 @@ const modal = () => {
   function openModalByScroll(){
     window.addEventListener('scroll', () => {
       if(!pressedButton && window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight){
-        console.log('bottom')
         document.querySelector('.fixed-gift').click();
         pressedButton = true;
       }
