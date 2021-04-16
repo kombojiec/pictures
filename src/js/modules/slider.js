@@ -3,8 +3,11 @@ const slider = (slideSelector, direct, prevButtonSelector, nextButtonSelector, m
   const slides = document.querySelectorAll(slideSelector);
   const direction = direct;
   let paused = false;
-
   let currentSlide = 0;
+
+  slides.forEach(slide => {
+    slide.classList.add('animated');
+  })
 
   function showSlide(value){
     if(value >= slides.length){
@@ -15,8 +18,7 @@ const slider = (slideSelector, direct, prevButtonSelector, nextButtonSelector, m
       currentSlide = value;
     }
     
-    slides.forEach(slide => {
-      slide.classList.add('animated');
+    slides.forEach(slide => {      
       slide.style.display = 'none';
     })
     slides[currentSlide].style.display = 'block';
@@ -50,13 +52,13 @@ const slider = (slideSelector, direct, prevButtonSelector, nextButtonSelector, m
     if(direction == 'vertical'){
       paused = setInterval(() => {
         setSlide(moveStep);
-        slides[currentSlide].classList.add('slideInDown');
+        slides[currentSlide].classList.add('bounceInDown');
       }, 3000);
     }else{
       paused = setInterval(() => {
         setSlide( -moveStep);
-        slides[currentSlide].classList.remove('slideInLeft');
-        slides[currentSlide].classList.add('slideInRight');
+        slides[currentSlide].classList.remove('bounceOutRight');
+        slides[currentSlide].classList.add('bounceInLeft');
       }, 3000)
     }
   }
