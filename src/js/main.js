@@ -5,6 +5,7 @@ import forms from './modules/forms';
 import checkTextInputs from './modules/checkTextInputs';
 import mask from './modules/mask';
 import styles from './modules/styles';
+import calc from './modules/calc';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -17,6 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
   checkTextInputs('[name="message"]');
   mask('[name="phone"]');
   styles('.button-styles');
+  calc('#size', '#material', '#options', '.promocode', '.calc-price');
 
   // https://pictures-546d3-default-rtdb.firebaseio.com/orders
   // fetch('https://pictures-546d3-default-rtdb.firebaseio.com/orders.json', {
