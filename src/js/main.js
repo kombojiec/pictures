@@ -6,6 +6,7 @@ import checkTextInputs from './modules/checkTextInputs';
 import mask from './modules/mask';
 import styles from './modules/styles';
 import calc from './modules/calc';
+import filter from './modules/filter';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -19,6 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
   mask('[name="phone"]');
   styles('.button-styles');
   calc('#size', '#material', '#options', '.promocode', '.calc-price');
+  filter();
 
   // https://pictures-546d3-default-rtdb.firebaseio.com/orders
   // fetch('https://pictures-546d3-default-rtdb.firebaseio.com/orders.json', {

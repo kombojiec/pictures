@@ -3619,6 +3619,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
 /* harmony import */ var _modules_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/styles */ "./src/js/modules/styles.js");
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
+/* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
+
 
 
 
@@ -3637,7 +3639,8 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="message"]');
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
   Object(_modules_styles__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-styles');
-  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_6__["default"])('#size', '#material', '#options', '.promocode', '.calc-price'); // https://pictures-546d3-default-rtdb.firebaseio.com/orders
+  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_6__["default"])('#size', '#material', '#options', '.promocode', '.calc-price');
+  Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])(); // https://pictures-546d3-default-rtdb.firebaseio.com/orders
   // fetch('https://pictures-546d3-default-rtdb.firebaseio.com/orders.json', {
   //   headers: {
   //     'Content-Type': 'application/json'
@@ -3725,6 +3728,70 @@ var checkTextInputs = function checkTextInputs(selector) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (checkTextInputs);
+
+/***/ }),
+
+/***/ "./src/js/modules/filter.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/filter.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var filter = function filter() {
+  var menu = document.querySelector('.portfolio-menu');
+  var buttons = menu.querySelectorAll('li');
+  var allCases = document.querySelectorAll('.portfolio-block.all');
+  var emptyCase = document.querySelector('.portfolio-no');
+
+  function filterCard() {
+    menu.addEventListener('click', function (event) {
+      emptyCase.style.display = 'none';
+      allCases.forEach(function (item) {
+        return item.style.display = 'none';
+      });
+      buttons.forEach(function (button) {
+        if (button.classList.contains('active')) {
+          button.classList.remove('active');
+        }
+      });
+      var target = event.target;
+      var filter = '';
+      target.classList.add('active');
+
+      if (event.target && target.nodeName == 'LI') {
+        filter = target.getAttribute('class').split(' ')[0];
+      }
+
+      if (filter) {
+        var items = 0;
+        allCases.forEach(function (item) {
+          if (item.classList.contains(filter)) {
+            item.style.display = 'block';
+            ++items;
+          }
+        });
+
+        if (!items) {
+          emptyCase.style.display = 'block';
+        }
+      }
+    });
+  }
+
+  filterCard();
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (filter);
 
 /***/ }),
 
