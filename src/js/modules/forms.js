@@ -1,4 +1,6 @@
 
+import {postData} from '../utiles/api';
+
 const forms = () => {
 
   const forms = document.querySelectorAll('form');
@@ -16,20 +18,6 @@ const forms = () => {
     spinner: './assets/img/spinner.gif',
     failure: './assets/img/fail.png',
   }
-
-  const postData = async (url, data) => {
-    // console.log(data.json());
-    const res = await fetch(url, {
-      // headers: {
-      //   // "Content-Type": "application/json",
-      //   "Content-Type": "multipart/json",
-      // }, 
-      method: 'POST',
-      body: data
-    })
-
-    return await res;
-  }
   
   forms.forEach(form => {   
     const uploads = document.querySelectorAll('[name="upload"]')
@@ -43,10 +31,6 @@ const forms = () => {
         input.previousElementSibling.textContent = name;
       })
     })
-
-    // uploads.forEach(input => {
-    //   input.previousElementSibling.textContent = 'Файл не выбран';
-    // })
 
     form.addEventListener('submit', event => {
       event.preventDefault();
@@ -70,17 +54,16 @@ const forms = () => {
       form.closest('.popup-design')? apiPath = path.disigner: apiPath = path.question;
 
       let data = {};
-      // inputs.forEach(input => {
-      //   data[input.name] = input.value;
-      // })
-      data = new FormData(form);
-      // console.log(JSON.stringify(data);
+      const inputs = form.querySelectorAll('input');
+      inputs.forEach(input => {
+        data[input.name] = input.value;
+      })
 
       postData(apiPath, data)
-      .then(res => {
+        .then(res => {
           statusImg.setAttribute('src', message.ok);
           statusMessageText.textContent = message.sucsess;
-          return res.json();
+          return res;
         })
         .then(res => {
           console.log(res);

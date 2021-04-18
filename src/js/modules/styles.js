@@ -1,19 +1,40 @@
 
-const styles = (buttonSelector, styleselector) => {
+import {getData} from '../utiles/api';
 
-  const styles = document.querySelectorAll(styleselector);
+const styles = (buttonSelector) => {
+
   const button = document.querySelector(buttonSelector);
 
-  button.addEventListener('click', () => {
-    styles.forEach(style => {
-      style.classList.add('animated', 'fadeInUp');
-    })
-    styles.forEach(style => {
-      style.classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs')
-      style.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1')
-    })
-  })
+  function getTemplate(templateselector){
+    return document.querySelector(templateselector)
+    .content
+    .querySelector('.styles-2')
+    .cloneNode(true);
+  }
 
+  function createCard(name, src, link){
+    const card = getTemplate('.style__template');
+    card.classList.add('animated', 'fadeInUp');
+    card.querySelector('img').setAttribute('src', src);
+    card.querySelector('img').setAttribute('alt', name);
+    card.querySelector('h4').textContent = name;
+    card.querySelector('a').setAttribute('href', link);
+    return card;
+  }
+
+  function renderCard(parentSelector, {name, src, link}){
+    document.querySelector(parentSelector).append(createCard(name, src, link));
+  }
+
+  const data =  getData('https://pictures-546d3-default-rtdb.firebaseio.com/cards.json')
+    .then(data => {
+        button.addEventListener('click', () => {
+      data.forEach(item => {
+        renderCard('.styles .row', item);
+      })
+      button.remove();
+    })
+  });
 }
 
 export default styles;

@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
   checkTextInputs('[name="name"]');
   checkTextInputs('[name="message"]');
   mask('[name="phone"]');
-  styles('.button-styles', '.styles-2');
+  styles('.button-styles');
 
   // https://pictures-546d3-default-rtdb.firebaseio.com/orders
   // fetch('https://pictures-546d3-default-rtdb.firebaseio.com/orders.json', {
