@@ -14,11 +14,10 @@ const calc = (sizeSelector, materialSelector, optionsSelector, promoSelector, re
     if(!size.value || !material.value){
       result.textContent = 'Пожалуйста, выберите размер и материал полотна';      
     }else if(promo.value.trim() == 'IWANTPOPART'){
-      result.textContent = Math.round(total * 0.7);
+      result.textContent = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(Math.round(total * 0.7));
     }else{
-      result.textContent = total;
+      result.textContent = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(total);
     }
-    console.log(total);
   }
 
   size.addEventListener('change', calculateSum);

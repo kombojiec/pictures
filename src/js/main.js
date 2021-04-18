@@ -7,6 +7,7 @@ import mask from './modules/mask';
 import styles from './modules/styles';
 import calc from './modules/calc';
 import filter from './modules/filter';
+import pictureSize from './modules/pictureSize';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -21,17 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
   styles('.button-styles');
   calc('#size', '#material', '#options', '.promocode', '.calc-price');
   filter();
+  pictureSize();
 
-  // https://pictures-546d3-default-rtdb.firebaseio.com/orders
-  // fetch('https://pictures-546d3-default-rtdb.firebaseio.com/orders.json', {
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //     // 'Content-Type': 'application/x-www-form-urlencoded',
-  //   },
-  //   method: 'get',
-  //   // body: JSON.stringify({name: 'value', phone: 'value'})
-  // })
-  // .then(res => res.json())
-  // .then(res => console.log(res))
   
 })
