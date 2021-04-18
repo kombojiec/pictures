@@ -53,13 +53,13 @@ const slider = (slideSelector, direct, prevButtonSelector, nextButtonSelector, m
       paused = setInterval(() => {
         setSlide(moveStep);
         slides[currentSlide].classList.add('bounceInDown');
-      }, 3000);
+      }, 4000);
     }else{
       paused = setInterval(() => {
         setSlide( -moveStep);
         slides[currentSlide].classList.remove('bounceOutRight');
         slides[currentSlide].classList.add('bounceInLeft');
-      }, 3000)
+      }, 4000)
     }
   }
   activateSlider();
