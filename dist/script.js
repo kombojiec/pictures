@@ -3732,6 +3732,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/pictureSize */ "./src/js/modules/pictureSize.js");
 /* harmony import */ var _modules_collapse__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/collapse */ "./src/js/modules/collapse.js");
 /* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
+/* harmony import */ var _modules_scroll__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/scroll */ "./src/js/modules/scroll.js");
+
 
 
 
@@ -3759,6 +3761,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__["default"])();
   Object(_modules_collapse__WEBPACK_IMPORTED_MODULE_9__["default"])('.accordion-heading');
   Object(_modules_burger__WEBPACK_IMPORTED_MODULE_10__["default"])('.burger', '.burger-menu');
+  Object(_modules_scroll__WEBPACK_IMPORTED_MODULE_11__["default"])();
 });
 
 /***/ }),
@@ -4332,6 +4335,82 @@ var pictureSize = function pictureSize() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (pictureSize);
+
+/***/ }),
+
+/***/ "./src/js/modules/scroll.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/scroll.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var scroll = function scroll() {
+  var upButton = document.querySelector('.pageup');
+  upButton.classList.add('animated');
+  window.addEventListener('scroll', function () {
+    if (document.documentElement.scrollTop > 1000) {
+      upButton.classList.add('fadeIn');
+      upButton.classList.remove('fadeOut');
+    } else {
+      upButton.classList.add('fadeOut');
+      upButton.classList.remove('fadeIn');
+    }
+  });
+  var element = document.documentElement;
+  var body = document.body;
+
+  var calcScroll = function calcScroll() {
+    upButton.addEventListener('click', function (event) {
+      var scrollTop = Math.round(body.scrollTop || element.scrollTop);
+
+      if (this.hash != '') {
+        event.preventDefault();
+        var hashElement = document.querySelector(this.hash);
+        var hashElementTop = 0;
+
+        while (hashElement.offsetParent) {
+          hashElementTop += hashElement.offsetTop;
+          hashElement = hashElement.offsetParent;
+        }
+
+        hashElementTop = Math.round(hashElementTop);
+        smoothScroll(scrollTop, hashElementTop, this.hash);
+      }
+    });
+
+    var smoothScroll = function smoothScroll(from, to, hash) {
+      var timeInterval = 1;
+      var prevScrollTop;
+      var speed;
+      to > from ? speed = 30 : speed = -30;
+      var move = setInterval(function () {
+        var scrollTop = Math.round(body.scrollTop || element.scrollTop);
+
+        if (prevScrollTop == scrollTop || to > from && scrollTop >= to || to < from && scrollTop <= to) {
+          clearInterval(move);
+          history.replaceState(history.state, document.title, location.href.replace(/#.*$/g, '') + hash);
+        } else {
+          body.scrollTop += speed;
+          element.scrollTop += speed;
+          prevScrollTop = scrollTop;
+        }
+      }, timeInterval);
+    };
+  };
+
+  calcScroll();
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (scroll); //  elem.offsetTop  получить высоту элемента
+//  elem.scrollTop  получить высоту элемента от верха
+//  document.documentElement.scrollTop   получить позицию от верха
 
 /***/ }),
 

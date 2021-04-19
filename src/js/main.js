@@ -10,6 +10,7 @@ import filter from './modules/filter';
 import pictureSize from './modules/pictureSize';
 import collapse from './modules/collapse';
 import burger from './modules/burger';
+import scroll from './modules/scroll';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -27,6 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
   pictureSize();
   collapse('.accordion-heading');
   burger('.burger', '.burger-menu');
+  scroll();
 
   
 })
