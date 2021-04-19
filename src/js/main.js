@@ -8,6 +8,7 @@ import styles from './modules/styles';
 import calc from './modules/calc';
 import filter from './modules/filter';
 import pictureSize from './modules/pictureSize';
+import collapse from './modules/collapse';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -23,6 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
   calc('#size', '#material', '#options', '.promocode', '.calc-price');
   filter();
   pictureSize();
+  collapse('.accordion-heading');
 
   
 })
