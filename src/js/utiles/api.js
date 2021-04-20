@@ -16,14 +16,15 @@ function getData(src){
 }
 
 function postData(url, data){
-  console.log(JSON.stringify(data));
+  console.log(data);
+  // console.log(JSON.stringify(data));
   fetch(url, {
     headers: {
       "Content-Type": "application/json",
       // "Content-Type": "multipart/json",
     }, 
     method: 'POST',
-    body: data
+    body: JSON.stringify(data)
   })
   .then(res => checkResponse(res))
 }

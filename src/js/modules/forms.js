@@ -61,6 +61,7 @@ const forms = () => {
 
       postData(apiPath, data)
         .then(res => {
+          console.log(res);
           statusImg.setAttribute('src', message.ok);
           statusMessageText.textContent = message.sucsess;
           return res;

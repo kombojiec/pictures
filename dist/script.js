@@ -4066,6 +4066,7 @@ var forms = function forms() {
         data[input.name] = input.value;
       });
       Object(_utiles_api__WEBPACK_IMPORTED_MODULE_7__["postData"])(apiPath, data).then(function (res) {
+        console.log(res);
         statusImg.setAttribute('src', message.ok);
         statusMessageText.textContent = message.sucsess;
         return res;
@@ -4403,9 +4404,8 @@ var scroll = function scroll() {
         }
       }, timeInterval);
     };
-  };
+  }; // calcScroll();
 
-  calcScroll();
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (scroll); //  elem.offsetTop  получить высоту элемента
@@ -4597,14 +4597,15 @@ function getData(src) {
 }
 
 function postData(url, data) {
-  console.log(JSON.stringify(data));
+  console.log(data); // console.log(JSON.stringify(data));
+
   fetch(url, {
     headers: {
       "Content-Type": "application/json" // "Content-Type": "multipart/json",
 
     },
     method: 'POST',
-    body: data
+    body: JSON.stringify(data)
   }).then(function (res) {
     return checkResponse(res);
   });
