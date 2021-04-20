@@ -4070,8 +4070,6 @@ var forms = function forms() {
         statusImg.setAttribute('src', message.ok);
         statusMessageText.textContent = message.sucsess;
         return res;
-      }).then(function (res) {
-        console.log(res);
       }).catch(function (error) {
         console.log(error);
         statusMessageText.textContent = message.fail;
@@ -4597,9 +4595,9 @@ function getData(src) {
 }
 
 function postData(url, data) {
-  console.log(data); // console.log(JSON.stringify(data));
-
-  fetch(url, {
+  // console.log(data);
+  // console.log(JSON.stringify(data));
+  return fetch(url, {
     headers: {
       "Content-Type": "application/json" // "Content-Type": "multipart/json",
 

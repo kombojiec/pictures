@@ -16,12 +16,9 @@ function getData(src){
 }
 
 function postData(url, data){
-  console.log(data);
-  // console.log(JSON.stringify(data));
-  fetch(url, {
+  return fetch(url, {
     headers: {
       "Content-Type": "application/json",
-      // "Content-Type": "multipart/json",
     }, 
     method: 'POST',
     body: JSON.stringify(data)

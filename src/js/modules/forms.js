@@ -66,9 +66,6 @@ const forms = () => {
           statusMessageText.textContent = message.sucsess;
           return res;
         })
-        .then(res => {
-          console.log(res);
-        })
         .catch((error) => {
           console.log(error)
           statusMessageText.textContent = message.fail;
